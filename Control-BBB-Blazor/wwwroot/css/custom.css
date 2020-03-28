@@ -1,0 +1,15 @@
+﻿.size-header {
+    height: 80px;
+}
+
+.logo-comunidades {
+    height: 56px;    
+    margin-left: 12px;
+    background: white;        
+    border-style: solid;
+    border-color: white;
+    border-radius: 0.2em;
+    -webkit-box-shadow: 2px 2px 4px 0px rgba(126, 27, 97, 0.75);
+    -moz-box-shadow: 2px 2px 4px 0px rgba(126, 27, 97, 0.75);
+    box-shadow: 2px 2px 4px 0px rgba(126, 27, 97, 0.75);
+}
