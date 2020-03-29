@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Control_BBB_Blazor.Data;
+using Sotsera.Blazor.Toaster.Core.Models;
 
 namespace Control_BBB_Blazor
 {
@@ -29,6 +30,21 @@ namespace Control_BBB_Blazor
       services.AddRazorPages();
       services.AddServerSideBlazor();
       services.AddSingleton<WeatherForecastService>();
+      
+      // Add the library to the DI system
+      services.AddToaster(config =>
+      {
+        //example customizations
+        config.PositionClass = Defaults.Classes.Position.TopRight;
+        config.PreventDuplicates = true;
+        config.NewestOnTop = false;
+        config.ShowTransitionDuration = 1000;
+        config.VisibleStateDuration = 5000;
+        config.HideTransitionDuration = 2000;
+        config.MaximumOpacity = 90;
+        config.MaxDisplayedToasts = 5;
+        config.PreventDuplicates = false;
+      });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
