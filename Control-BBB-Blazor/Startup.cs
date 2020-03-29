@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Control_BBB_Blazor.Data;
 using Sotsera.Blazor.Toaster.Core.Models;
+using Blazored.LocalStorage;
 
 namespace Control_BBB_Blazor
 {
@@ -30,7 +31,8 @@ namespace Control_BBB_Blazor
       services.AddRazorPages();
       services.AddServerSideBlazor();
       services.AddSingleton<WeatherForecastService>();
-      
+      services.AddBlazoredLocalStorage();
+
       // Add the library to the DI system
       services.AddToaster(config =>
       {
