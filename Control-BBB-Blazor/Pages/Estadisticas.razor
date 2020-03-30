@@ -1,4 +1,7 @@
 ﻿@page "/estadisticas"
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@using Control_BBB_Blazor.Data
+@using System.Xml;
 
 <div class="card">
   <div class="card-header">
@@ -11,7 +14,17 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Versión</h5>
-            <p class="card-text">BBB Version: ... <br /></p>
+            <p class="card-text">
+              BBB versión:
+              @if (version == -1)
+              {
+              <span><i> Cargando...</i></span>
+              }
+              else
+              {
+                @version.ToString(System.Globalization.CultureInfo.InvariantCulture)
+              }
+            </p>
           </div>
         </div>
       </div>
@@ -19,7 +32,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Salas</h5>
-            <p class="card-text">Cantidad salas: ... <br />Salas activas: ...</p>
+            <p class="card-text">Total: ...   Activas: ...</p>
           </div>
         </div>
       </div>
@@ -28,4 +41,27 @@
   </div>
 </div>
 
+@code {
+  [Inject]
+  protected Sotsera.Blazor.Toaster.IToaster Toaster { get; set; }
+  
+  private double version { get; set; } = -1;
+  private readonly HttpClient httpClient = new HttpClient();
+  private BBBVersion bBBVersion;
+
+  protected override async Task OnInitializedAsync()
+  {
+    HttpResponseMessage response = await httpClient.GetAsync("http://localhost:8000/bigbluebutton/api");
+    string stringCR = await response.Content.ReadAsStringAsync();
+
+    if (response.IsSuccessStatusCode)
+    {
+      XmlDocument doc = new XmlDocument();
+      doc.LoadXml(stringCR);
+      string json = JsonConvert.SerializeXmlNode(doc.DocumentElement.SelectSingleNode("version"));
+      bBBVersion = JsonConvert.DeserializeObject<BBBVersion>(json);
+      version = bBBVersion.Version;
+    }
+  }
+}
 

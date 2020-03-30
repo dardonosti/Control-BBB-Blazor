@@ -32,6 +32,7 @@ namespace Control_BBB_Blazor
       services.AddServerSideBlazor();
       services.AddSingleton<WeatherForecastService>();
       services.AddBlazoredLocalStorage();
+      services.AddHttpClient();
 
       // Add the library to the DI system
       services.AddToaster(config =>
