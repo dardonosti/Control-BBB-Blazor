@@ -18,8 +18,8 @@
               BBB versión:
               @if (version == -1)
               {
-                <span><i> Cargando...</i></span>
-              }
+                <span><i> @message</i></span>
+              } 
               else
               {
                 @version.ToString(System.Globalization.CultureInfo.InvariantCulture)
@@ -46,6 +46,7 @@
   protected Sotsera.Blazor.Toaster.IToaster Toaster { get; set; }
 
   private double version { get; set; } = -1;
+  public string message { get; set; } = "Cargando...";
   private readonly HttpClient httpClient = new HttpClient();
   private BBBVersion bBBVersion;
 
@@ -68,6 +69,8 @@
     catch (HttpRequestException e)
     {
       Console.WriteLine(e);
+      Toaster.Error("Ocurrió un error.", "Oops!");
+      message = "Error...";
     }
   }
 }
