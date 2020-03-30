@@ -18,7 +18,7 @@
               BBB versión:
               @if (version == -1)
               {
-              <span><i> Cargando...</i></span>
+                <span><i> Cargando...</i></span>
               }
               else
               {
@@ -44,23 +44,30 @@
 @code {
   [Inject]
   protected Sotsera.Blazor.Toaster.IToaster Toaster { get; set; }
-  
+
   private double version { get; set; } = -1;
   private readonly HttpClient httpClient = new HttpClient();
   private BBBVersion bBBVersion;
 
   protected override async Task OnInitializedAsync()
   {
-    HttpResponseMessage response = await httpClient.GetAsync("http://localhost:8000/bigbluebutton/api");
-    string stringCR = await response.Content.ReadAsStringAsync();
-
-    if (response.IsSuccessStatusCode)
+    try
     {
-      XmlDocument doc = new XmlDocument();
-      doc.LoadXml(stringCR);
-      string json = JsonConvert.SerializeXmlNode(doc.DocumentElement.SelectSingleNode("version"));
-      bBBVersion = JsonConvert.DeserializeObject<BBBVersion>(json);
-      version = bBBVersion.Version;
+      HttpResponseMessage response = await httpClient.GetAsync("http://localhost:8000/bigbluebutton/api");
+      string stringCR = await response.Content.ReadAsStringAsync();
+
+      if (response.IsSuccessStatusCode)
+      {
+        XmlDocument doc = new XmlDocument();
+        doc.LoadXml(stringCR);
+        string json = JsonConvert.SerializeXmlNode(doc.DocumentElement.SelectSingleNode("version"));
+        bBBVersion = JsonConvert.DeserializeObject<BBBVersion>(json);
+        version = bBBVersion.Version;
+      }
+    }
+    catch (HttpRequestException e)
+    {
+      Console.WriteLine(e);
     }
   }
 }
