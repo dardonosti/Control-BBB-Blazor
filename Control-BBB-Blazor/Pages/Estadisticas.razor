@@ -19,7 +19,7 @@
               @if (version == -1)
               {
                 <span><i> @message</i></span>
-              } 
+              }
               else
               {
                 @version.ToString(System.Globalization.CultureInfo.InvariantCulture)
@@ -49,12 +49,21 @@
   public string message { get; set; } = "Cargando...";
   private readonly HttpClient httpClient = new HttpClient();
   private BBBVersion bBBVersion;
+  private string myUrl { get; set; }
 
   protected override async Task OnInitializedAsync()
   {
     try
-    {     
-      HttpResponseMessage response = await httpClient.GetAsync(await localStorage.GetItemAsync<string>("url"));
+    {
+      try
+      {
+        myUrl = await localStorage.GetItemAsync<string>("url");
+      } catch (Exception e)
+      {
+        Console.WriteLine(e);
+      }
+
+      HttpResponseMessage response = await httpClient.GetAsync(myUrl);
       string stringCR = await response.Content.ReadAsStringAsync();
 
       if (response.IsSuccessStatusCode)
