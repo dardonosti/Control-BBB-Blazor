@@ -53,8 +53,8 @@
   protected override async Task OnInitializedAsync()
   {
     try
-    {
-      HttpResponseMessage response = await httpClient.GetAsync("http://localhost:8000/bigbluebutton/api");
+    {     
+      HttpResponseMessage response = await httpClient.GetAsync(await localStorage.GetItemAsync<string>("url"));
       string stringCR = await response.Content.ReadAsStringAsync();
 
       if (response.IsSuccessStatusCode)
