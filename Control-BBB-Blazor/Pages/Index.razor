@@ -43,6 +43,17 @@
 
   private string url { get; set; } = "http://localhost:8000/bigbluebutton/api";
   private string clave { get; set; } = "8cd8ef52e8e101574e400365b55e11a6";
+  private bool firstRender { get; set; } = true;
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    if (firstRender)
+    {
+      await localStorage.SetItemAsync("url", url);
+      await localStorage.SetItemAsync("clave", clave);
+      firstRender = false;
+    }
+  }
 
   public async Task HandleSubmit()
   {

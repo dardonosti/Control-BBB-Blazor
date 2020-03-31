@@ -46,46 +46,43 @@
   protected Sotsera.Blazor.Toaster.IToaster Toaster { get; set; }
 
   private double version { get; set; } = -1;
-  public string message { get; set; } = "Cargando...";
+  private string message { get; set; } = "Cargando...";
   private readonly HttpClient httpClient = new HttpClient();
   private BBBVersion bBBVersion;
   private string myUrl { get; set; }
+  private Boolean firstRender { get; set; } = true;
 
-  protected override async Task OnInitializedAsync()
+  protected override async Task OnAfterRenderAsync(bool firstRender)
   {
-    try
+    if (firstRender)
     {
+      myUrl = await localStorage.GetItemAsync<string>("url");
+
       try
       {
-        myUrl = await localStorage.GetItemAsync<string>("url");
-      } catch (Exception e)
+        HttpResponseMessage response = await httpClient.GetAsync(myUrl);
+        string stringCR = await response.Content.ReadAsStringAsync();
+
+        if (response.IsSuccessStatusCode)
+        {
+          XmlDocument doc = new XmlDocument();
+          doc.LoadXml(stringCR);
+          string json = JsonConvert.SerializeXmlNode(doc.DocumentElement.SelectSingleNode("version"));
+          bBBVersion = JsonConvert.DeserializeObject<BBBVersion>(json);
+          version = bBBVersion.Version;
+          this.StateHasChanged();
+        }
+      }
+      catch (Exception e)
       {
         Console.WriteLine(e);
-      }
-
-      HttpResponseMessage response = await httpClient.GetAsync(myUrl);
-      string stringCR = await response.Content.ReadAsStringAsync();
-
-      if (response.IsSuccessStatusCode)
-      {
-        XmlDocument doc = new XmlDocument();
-        doc.LoadXml(stringCR);
-        string json = JsonConvert.SerializeXmlNode(doc.DocumentElement.SelectSingleNode("version"));
-        bBBVersion = JsonConvert.DeserializeObject<BBBVersion>(json);
-        version = bBBVersion.Version;
-      }
-      else
-      {
         Toaster.Error("Ocurrió un error.", "Oops!");
         message = "Error...";
+        this.StateHasChanged();
       }
-    }
-    catch (HttpRequestException e)
-    {
-      Console.WriteLine(e);
-      Toaster.Error("Ocurrió un error.", "Oops!");
-      message = "Error...";
+      firstRender = false;
     }
   }
 }
+
 
