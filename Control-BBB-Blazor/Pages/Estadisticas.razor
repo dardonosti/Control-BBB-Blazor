@@ -65,6 +65,11 @@
         bBBVersion = JsonConvert.DeserializeObject<BBBVersion>(json);
         version = bBBVersion.Version;
       }
+      else
+      {
+        Toaster.Error("Ocurrió un error.", "Oops!");
+        message = "Error...";
+      }
     }
     catch (HttpRequestException e)
     {
