@@ -27,8 +27,10 @@
           </div>
           <div class="form-group row">
             <div class="col-sm-11 text-right">
-              <button type="button" @onclick="ResetForm" class="btn btn-secondary align-content-end">Limpiar</button>
-              <button type="submit" class="btn btn-primary align-content-end">Guardar</button>
+              <RadzenButton Text="Limpiar" Click="ResetForm" Icon="clear" ButtonStyle="ButtonStyle.Secondary" />
+              <RadzenButton Text="Guardar" type="submit" Icon="save" ButtonStyle="ButtonStyle.Secondary" />
+              @*<button type="button" @onclick="ResetForm" class="btn btn-secondary btn-sm align-content-end">Limpiar</button>
+              <button type="submit" class="btn btn-primary btn-sm align-content-end">Guardar</button>*@
             </div>
           </div>
         </form>

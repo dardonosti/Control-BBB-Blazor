@@ -1,12 +1,12 @@
-﻿@page "/estadisticas"
+﻿@page "/info"
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @using Control_BBB_Blazor.Data
 @using System.Xml;
 
 <div class="card">
   <div class="card-header">
-    Estadísticas
-    <span class="oi oi-bar-chart" aria-hidden="true" style="margin-top: 5px; float: right"></span>
+    Información
+    <span class="oi oi-info" aria-hidden="true" style="margin-top: 5px; float: right"></span>
   </div>
   <div class="card-body">
     <div class="row">
@@ -22,7 +22,7 @@
               }
               else
               {
-                @version.ToString(System.Globalization.CultureInfo.InvariantCulture)
+            <span class="badge badge-pill badge-info">@version.ToString(System.Globalization.CultureInfo.InvariantCulture)</span>
               }
             </p>
           </div>
@@ -32,7 +32,15 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Salas</h5>
-            <p class="card-text">Total: ...   Activas: ...</p>
+            <div class="row">
+              <div class="col">
+                <p class="card-text">Total: <span class="badge badge-pill badge-info">...</span></p>
+              </div>
+              <div class="col">
+                <p class="card-text">Activas: <span class="badge badge-pill badge-info">...</span></p>
+              </div>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -84,5 +92,3 @@
     }
   }
 }
-
-

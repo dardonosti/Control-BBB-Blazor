@@ -1,0 +1,107 @@
+﻿@page "/salas"
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@using Control_BBB_Blazor.Data
+@using System.Xml;
+
+<div class="card">
+  <div class="card-header">
+    Salas
+    <span class="oi oi-list" aria-hidden="true" style="margin-top: 5px; float: right"></span>
+  </div>
+  <div class="card-body">
+    <div>
+      <RadzenButton Text="Actualizar" Icon="refresh" ButtonStyle="ButtonStyle.Secondary"/>
+      @*<button type="button" class="btn btn-primary btn-sm"><span class="oi oi-reload"></span>  Actualizar</button>*@
+    </div>
+    <div class="mt-4">
+      <RadzenGrid AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="4"
+                  AllowSorting="true" Data="@employees" TItem="Employee" ColumnWidth="200px">
+        @*<Columns>
+          <RadzenGridColumn TItem="Employee" Property="EmployeeID" Title="Employee ID" />
+          <RadzenGridColumn TItem="Employee" Property="Photo" Title="Photo" Sortable="false" Filterable="false">
+            <Template Context="data">
+              <RadzenImage Path="@data?.Photo" />
+            </Template>
+          </RadzenGridColumn>
+          <RadzenGridColumn TItem="Employee" Property="LastName" Title="Last Name" />
+          <RadzenGridColumn TItem="Employee" Property="FirstName" Title="First Name" />
+          <RadzenGridColumn TItem="Employee" Property="Title" Title="Title" />
+          <RadzenGridColumn TItem="Employee" Property="TitleOfCourtesy" Title="Title Of Courtesy" />
+          <RadzenGridColumn TItem="Employee" Property="BirthDate" Title="Birth Date">
+            <Template Context="data">
+              @String.Format("{0:d}", data.BirthDate)
+            </Template>
+          </RadzenGridColumn>
+          <RadzenGridColumn TItem="Employee" Property="HireDate" Title="Hire Date">
+            <Template Context="data">
+              @String.Format("{0:d}", data.HireDate)
+            </Template>
+          </RadzenGridColumn>
+          <RadzenGridColumn TItem="Employee" Property="Address" Title="Address" />
+          <RadzenGridColumn TItem="Employee" Property="City" Title="City" />
+          <RadzenGridColumn TItem="Employee" Property="Region" Title="Region" />
+          <RadzenGridColumn TItem="Employee" Property="PostalCode" Title="Postal Code" />
+          <RadzenGridColumn TItem="Employee" Property="Country" Title="Country" />
+          <RadzenGridColumn TItem="Employee" Property="HomePhone" Title="Home Phone" />
+          <RadzenGridColumn TItem="Employee" Property="Extension" Title="Extension" />
+          <RadzenGridColumn TItem="Employee" Property="Notes" Title="Notes" />
+        </Columns>*@
+      </RadzenGrid>
+    </div>
+  </div>
+</div>
+
+@code {
+  [Inject]
+  protected Sotsera.Blazor.Toaster.IToaster Toaster { get; set; }
+
+  private double version { get; set; } = -1;
+  private string message { get; set; } = "Cargando...";
+  private readonly HttpClient httpClient = new HttpClient();
+  private BBBVersion bBBVersion;
+  private string myUrl { get; set; }
+  private Boolean firstRender { get; set; } = true;
+
+  IEnumerable<Employee> employees;
+
+  class Employee
+  {
+    Employee()
+    {
+
+    }
+  };
+
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    if (firstRender)
+    {
+      myUrl = await localStorage.GetItemAsync<string>("url");
+
+      try
+      {
+        HttpResponseMessage response = await httpClient.GetAsync(myUrl);
+        string stringCR = await response.Content.ReadAsStringAsync();
+
+        if (response.IsSuccessStatusCode)
+        {
+          XmlDocument doc = new XmlDocument();
+          doc.LoadXml(stringCR);
+          string json = JsonConvert.SerializeXmlNode(doc.DocumentElement.SelectSingleNode("version"));
+          bBBVersion = JsonConvert.DeserializeObject<BBBVersion>(json);
+          version = bBBVersion.Version;
+          this.StateHasChanged();
+        }
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(e);
+        Toaster.Error("Ocurrió un error.", "Oops!");
+        message = "Error...";
+        this.StateHasChanged();
+      }
+      firstRender = false;
+    }
+  }
+}
