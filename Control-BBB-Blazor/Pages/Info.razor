@@ -1,7 +1,9 @@
 ﻿@page "/info"
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 @using Control_BBB_Blazor.Data
-@using System.Xml;
+@using Control_BBB_Blazor.Utils
+@using System.IO;
+@using System.Xml.Serialization;
 
 <div class="card">
   <div class="card-header">
@@ -16,13 +18,13 @@
             <h5 class="card-title">Versión</h5>
             <p class="card-text">
               BBB versión:
-              @if (version == -1)
+              @if (string.IsNullOrEmpty(version))
               {
                 <span><i> @message</i></span>
               }
               else
               {
-            <span class="badge badge-pill badge-info" style="font-size: 1em">@version.ToString(System.Globalization.CultureInfo.InvariantCulture)</span>
+                <span class="badge badge-pill badge-info" style="font-size: 1em">@version</span>
               }
             </p>
           </div>
@@ -34,13 +36,15 @@
             <h5 class="card-title">Salas</h5>
             <div class="row">
               <div class="col">
-                <p class="card-text">Total: <span class="badge badge-pill badge-info" style="font-size: 1em">...</span></p>
+                <p class="card-text">
+                  Total:
+                  <span class="badge badge-pill badge-info" style="font-size: 1em">...</span>
+                </p>
               </div>
               <div class="col">
                 <p class="card-text">Activas: <span class="badge badge-pill badge-info" style="font-size: 1em">...</span></p>
               </div>
             </div>
-            
           </div>
         </div>
       </div>
@@ -53,31 +57,31 @@
   [Inject]
   protected Sotsera.Blazor.Toaster.IToaster Toaster { get; set; }
 
-  private double version { get; set; } = -1;
+  private string version { get; set; }
   private string message { get; set; } = "Cargando...";
   private readonly HttpClient httpClient = new HttpClient();
-  private BBBVersion bBBVersion;
-  private string myUrl { get; set; }
+  private VersionBBB versionBBB;
+  private string url { get; set; }
+  private string secret { get; set; }
   private Boolean firstRender { get; set; } = true;
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     if (firstRender)
     {
-      myUrl = await localStorage.GetItemAsync<string>("url");
+      url = await localStorage.GetItemAsync<string>("url");
+      secret = await localStorage.GetItemAsync<string>("secret");
 
       try
       {
-        HttpResponseMessage response = await httpClient.GetAsync(myUrl);
-        string stringCR = await response.Content.ReadAsStringAsync();
+        HttpResponseMessage response = await httpClient.GetAsync(url);
+        string responseContent = await response.Content.ReadAsStringAsync();
 
         if (response.IsSuccessStatusCode)
         {
-          XmlDocument doc = new XmlDocument();
-          doc.LoadXml(stringCR);
-          string json = JsonConvert.SerializeXmlNode(doc.DocumentElement.SelectSingleNode("version"));
-          bBBVersion = JsonConvert.DeserializeObject<BBBVersion>(json);
-          version = bBBVersion.Version;
+          XmlSerializer x = new XmlSerializer(typeof(VersionBBB));
+          versionBBB = (VersionBBB)x.Deserialize(new StringReader(responseContent));
+          version = versionBBB.Version;
           this.StateHasChanged();
         }
       }
@@ -88,6 +92,25 @@
         message = "Error...";
         this.StateHasChanged();
       }
+
+      try
+      {
+        HttpResponseMessage response = await httpClient.GetAsync(ApiCall.getMeetings(url, secret));
+        string responseContent = await response.Content.ReadAsStringAsync();
+
+        if (response.IsSuccessStatusCode)
+        {
+          //this.StateHasChanged();
+        }
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(e);
+        Toaster.Error("Ocurrió un error.", "Oops!");
+        message = "Error...";
+        this.StateHasChanged();
+      }
+
       firstRender = false;
     }
   }

@@ -58,7 +58,7 @@
   private double version { get; set; } = -1;
   private string message { get; set; } = "Cargando...";
   private readonly HttpClient httpClient = new HttpClient();
-  private BBBVersion bBBVersion;
+  private VersionBBB versionBBB;
   private string myUrl { get; set; }
   private Boolean firstRender { get; set; } = true;
 
@@ -86,12 +86,7 @@
 
         if (response.IsSuccessStatusCode)
         {
-          XmlDocument doc = new XmlDocument();
-          doc.LoadXml(stringCR);
-          string json = JsonConvert.SerializeXmlNode(doc.DocumentElement.SelectSingleNode("version"));
-          bBBVersion = JsonConvert.DeserializeObject<BBBVersion>(json);
-          version = bBBVersion.Version;
-          this.StateHasChanged();
+          //this.StateHasChanged();
         }
       }
       catch (Exception e)
