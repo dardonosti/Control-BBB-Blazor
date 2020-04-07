@@ -4,8 +4,8 @@
   {
     public static string getMeetings(string url, string clave)
     {
-      var text = EasyEncryption.SHA.ComputeSHA1Hash("getMeetings" + clave);
-      return url + "/getMeetings?checksum=" + text;
+      var str = EasyEncryption.SHA.ComputeSHA1Hash("getMeetings" + clave);
+      return url + "/getMeetings?checksum=" + str;
     }
 
     //public static string endMeetings(ID sala a cerrar);
