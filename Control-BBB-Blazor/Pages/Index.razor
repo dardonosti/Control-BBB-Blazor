@@ -27,10 +27,8 @@
           </div>
           <div class="form-group row">
             <div class="col-sm-11 text-right">
-              <RadzenButton Text="Limpiar" Click="ResetForm" Icon="clear" ButtonStyle="ButtonStyle.Secondary" />
-              <RadzenButton Text="Guardar" type="submit" Icon="save" ButtonStyle="ButtonStyle.Secondary" />
-              @*<button type="button" @onclick="ResetForm" class="btn btn-secondary btn-sm align-content-end">Limpiar</button>
-              <button type="submit" class="btn btn-primary btn-sm align-content-end">Guardar</button>*@
+              <button type="button" @onclick="ResetForm" class="btn btn-secondary align-content-end"><span class="oi oi-x mr-2"></span>Limpiar</button>
+              <button type="submit" class="btn btn-primary align-content-end"><span class="oi oi-check mr-2"></span>Guardar</button>
             </div>
           </div>
         </form>
@@ -44,7 +42,7 @@
   protected Sotsera.Blazor.Toaster.IToaster Toaster { get; set; }
 
   private string url { get; set; } = "http://bbblisandro.duckdns.org/bigbluebutton/api";
-  private string secret { get; set; } = "xrlUJJKyUVfQ26F6AYcU6oTEcP4OxAaGbq4Fj6IFvg";
+  private string secret { get; set; } = "TM6I5tVVENQOLespdftbHQhF3M2SMYToOP7F4otJAc";
   private bool firstRender { get; set; } = true;
 
   protected override async Task OnAfterRenderAsync(bool firstRender)

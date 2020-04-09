@@ -13,3 +13,18 @@
     -moz-box-shadow: 2px 2px 4px 0px rgba(126, 27, 97, 0.75);
     box-shadow: 2px 2px 4px 0px rgba(126, 27, 97, 0.75);
 }
+
+.sidebar {
+    background-image: none;
+    background-color: #a82682;
+}
+
+.btn-primary, .btn-primary:active, .btn-primary:visited {
+    background-color: #514663 !important;
+    border-color: #514663;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #524667cb !important;
+    border-color: #524667cb;
+}
