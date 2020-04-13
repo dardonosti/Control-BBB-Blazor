@@ -5,57 +5,113 @@
 @using System.IO;
 @using System.Xml.Serialization;
 
-<div class="card">
+<div class="card text-white bg-dark">
   <div class="card-header">
-    Información
+    <span style="font-size: 1.2em;">Información</span>
     <span class="oi oi-info" aria-hidden="true" style="margin-top: 5px; float: right"></span>
   </div>
   <div class="card-body">
     <div class="row">
-      <div class="col-sm-12 col-lg-6 mb-4">
-        <div class="card">
+      <div class="col-sm-12 col-lg-4 mb-4">
+        <div class="card text-white bg-dark">
           <div class="card-body">
-            <h5 class="card-title">Versión<span class="oi oi-info" style="color: gray; float: right"></span></h5>
+            <h5 class="card-title">Versión BBB<span class="oi oi-info" style="color: gray; float: right"></span></h5>
             <p class="card-text">
-              BBB versión:
               @if (string.IsNullOrEmpty(version))
               {
-                <span><i> @message</i></span>
+                <span><i>@message</i></span>
               }
               else
               {
-                <span class="badge badge-pill badge-info" style="font-size: 1em">@version</span>
+                <span class="card-content-font">@version</span>
               }
             </p>
           </div>
         </div>
       </div>
-      <div class="col-sm-12 col-lg-6 mb-4">
-        <div class="card">
+
+      <div class="col-sm-12 col-lg-4 mb-4">
+        <div class="card text-white bg-dark">
           <div class="card-body">
-            <h5 class="card-title">Salas<span class="oi oi-monitor" style="color: gray; float: right"></span></h5>
-            <div class="row">
-              <div class="col">
+            <h5 class="card-title">Total Salas<span class="oi oi-monitor" style="color: gray; float: right"></span></h5>
                 <p class="card-text">
-                  Total:
-                  <span class="badge badge-pill badge-info" style="font-size: 1em">...</span>
+                  <span class="card-content-font">123</span>
                 </p>
-              </div>
-              <div class="col">
-                <p class="card-text">Activas: <span class="badge badge-pill badge-info" style="font-size: 1em">...</span></p>
-              </div>
-            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-sm-12 col-lg-4 mb-4">
+        <div class="card text-white bg-dark">
+          <div class="card-body">
+            <h5 class="card-title">Salas Activas<span class="oi oi-monitor" style="color: gray; float: right"></span></h5>
+                <p class="card-text">
+                  <span class="card-content-font">76</span>
+                </p>
           </div>
         </div>
       </div>
     </div>
+
     <div class="row">
-      <div class="col-sm-12">
-        <div class="card">
+      <div class="col-sm-12 col-lg-4 mb-4">
+        <div class="card text-white bg-dark">
           <div class="card-body">
-            <h5 class="card-title">Usuarios<span class="oi oi-people" style="color: gray; float: right"></span></h5>
+            <h5 class="card-title">Total Usuarios<span class="oi oi-people" style="color: gray; float: right"></span></h5>
+                <p class="card-text">
+                  <span class="card-content-font">320</span>
+                </p>
           </div>
         </div>
+      </div>
+
+      <div class="col-sm-12 col-lg-4 mb-4">
+        <div class="card text-white bg-dark">
+          <div class="card-body">
+            <h5 class="card-title">Total Moderadores<span class="oi oi-people" style="color: gray; float: right"></span></h5>
+                <p class="card-text">
+                  <span class="card-content-font">98</span>
+                </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-lg-4 mb-4">
+        <div class="card text-white bg-dark">
+          <div class="card-body">
+            <h5 class="card-title">Total Oyentes<span class="oi oi-people" style="color: gray; float: right"></span></h5>
+                <p class="card-text">
+                  <span class="card-content-font">267</span>
+                </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 col-lg-4 mb-4">
+        <div class="card text-white bg-dark">
+          <div class="card-body">
+            <h5 class="card-title">Total con Audio<span class="oi oi-people" style="color: gray; float: right"></span></h5>
+                <p class="card-text">
+                  <span class="card-content-font">180</span>
+                </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-lg-4 mb-4">
+        <div class="card text-white bg-dark">
+          <div class="card-body">
+            <h5 class="card-title">Total con Video<span class="oi oi-people" style="color: gray; float: right"></span></h5>
+                <p class="card-text">
+                  <span class="card-content-font">72</span>
+                </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-lg-4 mb-4">
       </div>
     </div>
   </div>
@@ -63,63 +119,63 @@
 
 @code {
   [Inject]
-  protected Sotsera.Blazor.Toaster.IToaster Toaster { get; set; }
+      protected Sotsera.Blazor.Toaster.IToaster Toaster { get; set; }
 
-  private string version { get; set; }
-  private string message { get; set; } = "Cargando...";
-  private readonly HttpClient httpClient = new HttpClient();
-  private VersionBBB versionBBB;
-  private string url { get; set; }
-  private string secret { get; set; }
-  private bool firstRender { get; set; } = true;
+      private string version { get; set; }
+      private string message { get; set; } = "Cargando...";
+      private readonly HttpClient httpClient = new HttpClient();
+      private VersionBBB versionBBB;
+      private string url { get; set; }
+      private string secret { get; set; }
+      private bool firstRender { get; set; } = true;
 
-  protected override async Task OnAfterRenderAsync(bool firstRender)
-  {
-    if (firstRender)
-    {
-      url = await localStorage.GetItemAsync<string>("url");
-      secret = await localStorage.GetItemAsync<string>("secret");
-
-      try
+      protected override async Task OnAfterRenderAsync(bool firstRender)
       {
-        HttpResponseMessage response = await httpClient.GetAsync(url);
-        string responseContent = await response.Content.ReadAsStringAsync();
+          if (firstRender)
+          {
+              url = await localStorage.GetItemAsync<string>("url");
+              secret = await localStorage.GetItemAsync<string>("secret");
 
-        if (response.IsSuccessStatusCode)
-        {
-          XmlSerializer x = new XmlSerializer(typeof(VersionBBB));
-          versionBBB = (VersionBBB)x.Deserialize(new StringReader(responseContent));
-          version = versionBBB.Version;
-          this.StateHasChanged();
-        }
-      }
-      catch (Exception e)
-      {
-        Console.WriteLine(e);
-        Toaster.Error("Ocurrió un error.", "Oops!");
-        message = "Error...";
-        this.StateHasChanged();
-      }
+              try
+              {
+                  HttpResponseMessage response = await httpClient.GetAsync(url);
+                  string responseContent = await response.Content.ReadAsStringAsync();
 
-      try
-      {
-        HttpResponseMessage response = await httpClient.GetAsync(ApiCall.getMeetings(url, secret));
-        string responseContent = await response.Content.ReadAsStringAsync();
+                  if (response.IsSuccessStatusCode)
+                  {
+                      XmlSerializer x = new XmlSerializer(typeof(VersionBBB));
+                      versionBBB = (VersionBBB)x.Deserialize(new StringReader(responseContent));
+                      version = versionBBB.Version;
+                      this.StateHasChanged();
+                  }
+              }
+              catch (Exception e)
+              {
+                  Console.WriteLine(e);
+                  Toaster.Error("Ocurrió un error.", "Oops!");
+                  message = "Error...";
+                  this.StateHasChanged();
+              }
 
-        if (response.IsSuccessStatusCode)
-        {
-          //this.StateHasChanged();
-        }
-      }
-      catch (Exception e)
-      {
-        Console.WriteLine(e);
-        Toaster.Error("Ocurrió un error.", "Oops!");
-        message = "Error...";
-        this.StateHasChanged();
-      }
+              try
+              {
+                  HttpResponseMessage response = await httpClient.GetAsync(ApiCall.getMeetings(url, secret));
+                  string responseContent = await response.Content.ReadAsStringAsync();
 
-      firstRender = false;
-    }
-  }
+                  if (response.IsSuccessStatusCode)
+                  {
+                      //this.StateHasChanged();
+                  }
+              }
+              catch (Exception e)
+              {
+                  Console.WriteLine(e);
+                  Toaster.Error("Ocurrió un error.", "Oops!");
+                  message = "Error...";
+                  this.StateHasChanged();
+              }
+
+              firstRender = false;
+          }
+      }
 }

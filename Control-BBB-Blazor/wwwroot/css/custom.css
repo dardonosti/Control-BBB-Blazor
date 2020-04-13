@@ -1,4 +1,27 @@
-﻿.size-header {
+﻿* {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+.bg-dark {
+    background-color: #141414 !important;
+}
+
+.main-bg {
+    background-color: black;
+}
+
+.card-content-font {
+    font-weight: bold;
+    font-size: 2em;
+    color: #A82582;
+}
+
+.main .top-row {
+    background-color: #141414;
+    border: none;
+}
+
+.size-header {
     height: 80px;
 }
 
