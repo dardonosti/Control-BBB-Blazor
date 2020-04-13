@@ -24,7 +24,6 @@ namespace Control_BBB_Blazor
     {
       services.AddRazorPages();
       services.AddServerSideBlazor();
-      services.AddSingleton<WeatherForecastService>();
       services.AddBlazoredLocalStorage();
       services.AddHttpClient();
 
