@@ -10,43 +10,22 @@
   </div>
   <div class="card-body">
     <div>
-      <RadzenButton Text="Actualizar" Icon="refresh" ButtonStyle="ButtonStyle.Secondary"/>
-      @*<button type="button" class="btn btn-primary btn-sm"><span class="oi oi-reload"></span>  Actualizar</button>*@
+      <button type="button" class="btn btn-primary btn-sm"><span class="oi oi-reload"></span>  Actualizar</button>
     </div>
     <div class="mt-4">
-      <RadzenGrid AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="4"
-                  AllowSorting="true" Data="@employees" TItem="Employee" ColumnWidth="200px">
-        @*<Columns>
-          <RadzenGridColumn TItem="Employee" Property="EmployeeID" Title="Employee ID" />
-          <RadzenGridColumn TItem="Employee" Property="Photo" Title="Photo" Sortable="false" Filterable="false">
-            <Template Context="data">
-              <RadzenImage Path="@data?.Photo" />
-            </Template>
-          </RadzenGridColumn>
-          <RadzenGridColumn TItem="Employee" Property="LastName" Title="Last Name" />
-          <RadzenGridColumn TItem="Employee" Property="FirstName" Title="First Name" />
-          <RadzenGridColumn TItem="Employee" Property="Title" Title="Title" />
-          <RadzenGridColumn TItem="Employee" Property="TitleOfCourtesy" Title="Title Of Courtesy" />
-          <RadzenGridColumn TItem="Employee" Property="BirthDate" Title="Birth Date">
-            <Template Context="data">
-              @String.Format("{0:d}", data.BirthDate)
-            </Template>
-          </RadzenGridColumn>
-          <RadzenGridColumn TItem="Employee" Property="HireDate" Title="Hire Date">
-            <Template Context="data">
-              @String.Format("{0:d}", data.HireDate)
-            </Template>
-          </RadzenGridColumn>
-          <RadzenGridColumn TItem="Employee" Property="Address" Title="Address" />
-          <RadzenGridColumn TItem="Employee" Property="City" Title="City" />
-          <RadzenGridColumn TItem="Employee" Property="Region" Title="Region" />
-          <RadzenGridColumn TItem="Employee" Property="PostalCode" Title="Postal Code" />
-          <RadzenGridColumn TItem="Employee" Property="Country" Title="Country" />
-          <RadzenGridColumn TItem="Employee" Property="HomePhone" Title="Home Phone" />
-          <RadzenGridColumn TItem="Employee" Property="Extension" Title="Extension" />
-          <RadzenGridColumn TItem="Employee" Property="Notes" Title="Notes" />
-        </Columns>*@
-      </RadzenGrid>
+      <div class="row">
+        <div class="col">
+          @if (string.IsNullOrEmpty(version))
+                  {
+                    <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span> 
+                    <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
+                  }
+                  else
+                  {
+                    <span class="card-content-font">@version</span>
+                  }
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -55,24 +34,12 @@
   [Inject]
   protected Sotsera.Blazor.Toaster.IToaster Toaster { get; set; }
 
-  private double version { get; set; } = -1;
-  private string message { get; set; } = "Cargando...";
+  private string version { get; set; }
+  private string message { get; set; } = "No hay datos...";
   private readonly HttpClient httpClient = new HttpClient();
   private VersionBBB versionBBB;
   private string myUrl { get; set; }
   private bool firstRender { get; set; } = true;
-
-  IEnumerable<Employee> employees;
-
-  class Employee
-  {
-    Employee()
-    {
-
-    }
-  };
-
-
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     if (firstRender)

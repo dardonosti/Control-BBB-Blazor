@@ -19,7 +19,8 @@
             <p class="card-text">
               @if (string.IsNullOrEmpty(version))
               {
-                <span><i>@message</i></span>
+                <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span> 
+                <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
               }
               else
               {
@@ -35,7 +36,15 @@
           <div class="card-body">
             <h5 class="card-title">Total Salas<span class="oi oi-monitor" style="color: gray; float: right"></span></h5>
                 <p class="card-text">
-                  <span class="card-content-font">123</span>
+                  @if (string.IsNullOrEmpty(version))
+                  {
+                    <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span> 
+                    <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
+                  }
+                  else
+                  {
+                    <span class="card-content-font">@version</span>
+                  }
                 </p>
           </div>
         </div>
@@ -46,7 +55,15 @@
           <div class="card-body">
             <h5 class="card-title">Salas Activas<span class="oi oi-monitor" style="color: gray; float: right"></span></h5>
                 <p class="card-text">
-                  <span class="card-content-font">76</span>
+                  @if (string.IsNullOrEmpty(version))
+                  {
+                    <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span> 
+                    <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
+                  }
+                  else
+                  {
+                    <span class="card-content-font">@version</span>
+                  }
                 </p>
           </div>
         </div>
@@ -59,7 +76,15 @@
           <div class="card-body">
             <h5 class="card-title">Total Usuarios<span class="oi oi-people" style="color: gray; float: right"></span></h5>
                 <p class="card-text">
-                  <span class="card-content-font">320</span>
+                  @if (string.IsNullOrEmpty(version))
+                  {
+                    <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span> 
+                    <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
+                  }
+                  else
+                  {
+                    <span class="card-content-font">@version</span>
+                  }
                 </p>
           </div>
         </div>
@@ -70,7 +95,15 @@
           <div class="card-body">
             <h5 class="card-title">Total Moderadores<span class="oi oi-people" style="color: gray; float: right"></span></h5>
                 <p class="card-text">
-                  <span class="card-content-font">98</span>
+                  @if (string.IsNullOrEmpty(version))
+                  {
+                    <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span> 
+                    <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
+                  }
+                  else
+                  {
+                    <span class="card-content-font">@version</span>
+                  }
                 </p>
           </div>
         </div>
@@ -81,7 +114,15 @@
           <div class="card-body">
             <h5 class="card-title">Total Oyentes<span class="oi oi-people" style="color: gray; float: right"></span></h5>
                 <p class="card-text">
-                  <span class="card-content-font">267</span>
+                  @if (string.IsNullOrEmpty(version))
+                  {
+                    <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span> 
+                    <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
+                  }
+                  else
+                  {
+                    <span class="card-content-font">@version</span>
+                  }
                 </p>
           </div>
         </div>
@@ -94,7 +135,15 @@
           <div class="card-body">
             <h5 class="card-title">Total con Audio<span class="oi oi-people" style="color: gray; float: right"></span></h5>
                 <p class="card-text">
-                  <span class="card-content-font">180</span>
+                  @if (string.IsNullOrEmpty(version))
+                  {
+                    <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span> 
+                    <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
+                  }
+                  else
+                  {
+                    <span class="card-content-font">@version</span>
+                  }
                 </p>
           </div>
         </div>
@@ -105,7 +154,15 @@
           <div class="card-body">
             <h5 class="card-title">Total con Video<span class="oi oi-people" style="color: gray; float: right"></span></h5>
                 <p class="card-text">
-                  <span class="card-content-font">72</span>
+                  @if (string.IsNullOrEmpty(version))
+                  {
+                    <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span> 
+                    <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
+                  }
+                  else
+                  {
+                    <span class="card-content-font">@version</span>
+                  }
                 </p>
           </div>
         </div>
@@ -122,7 +179,7 @@
       protected Sotsera.Blazor.Toaster.IToaster Toaster { get; set; }
 
       private string version { get; set; }
-      private string message { get; set; } = "Cargando...";
+      private string message { get; set; } = "No hay datos...";
       private readonly HttpClient httpClient = new HttpClient();
       private VersionBBB versionBBB;
       private string url { get; set; }
@@ -152,9 +209,9 @@
               catch (Exception e)
               {
                   Console.WriteLine(e);
-                  Toaster.Error("Ocurrió un error.", "Oops!");
+                  @* Toaster.Error("Ocurrió un error.", "Oops!");
                   message = "Error...";
-                  this.StateHasChanged();
+                  this.StateHasChanged(); *@
               }
 
               try
@@ -170,9 +227,9 @@
               catch (Exception e)
               {
                   Console.WriteLine(e);
-                  Toaster.Error("Ocurrió un error.", "Oops!");
+                  @* Toaster.Error("Ocurrió un error.", "Oops!");
                   message = "Error...";
-                  this.StateHasChanged();
+                  this.StateHasChanged(); *@
               }
 
               firstRender = false;
