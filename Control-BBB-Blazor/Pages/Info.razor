@@ -19,7 +19,7 @@
             <p class="card-text">
               @if (string.IsNullOrEmpty(version))
               {
-                <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span> 
+                <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span>
                 <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
               }
               else
@@ -35,36 +35,36 @@
         <div class="card text-white bg-dark">
           <div class="card-body">
             <h5 class="card-title">Total Salas<span class="oi oi-monitor" style="color: gray; float: right"></span></h5>
-                <p class="card-text">
-                  @if (string.IsNullOrEmpty(version))
-                  {
-                    <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span> 
-                    <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
-                  }
-                  else
-                  {
-                    <span class="card-content-font">@version</span>
-                  }
-                </p>
+            <p class="card-text">
+              @if (string.IsNullOrEmpty(salas))
+              {
+                <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span>
+                <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
+              }
+              else
+              {
+                <span class="card-content-font">@salas</span>
+              }
+            </p>
           </div>
         </div>
       </div>
-      
+
       <div class="col-sm-12 col-md-12 col-lg-4 mb-4">
         <div class="card text-white bg-dark">
           <div class="card-body">
             <h5 class="card-title">Salas Activas<span class="oi oi-monitor" style="color: gray; float: right"></span></h5>
-                <p class="card-text">
-                  @if (string.IsNullOrEmpty(version))
-                  {
-                    <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span> 
-                    <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
-                  }
-                  else
-                  {
-                    <span class="card-content-font">@version</span>
-                  }
-                </p>
+            <p class="card-text">
+              @if (string.IsNullOrEmpty(activas))
+              {
+                <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span>
+                <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
+              }
+              else
+              {
+                <span class="card-content-font">@activas</span>
+              }
+            </p>
           </div>
         </div>
       </div>
@@ -75,17 +75,17 @@
         <div class="card text-white bg-dark">
           <div class="card-body">
             <h5 class="card-title">Total Usuarios<span class="oi oi-people" style="color: gray; float: right"></span></h5>
-                <p class="card-text">
-                  @if (string.IsNullOrEmpty(version))
-                  {
-                    <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span> 
-                    <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
-                  }
-                  else
-                  {
-                    <span class="card-content-font">@version</span>
-                  }
-                </p>
+            <p class="card-text">
+              @if (sinDatos)
+              {
+                <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span>
+                <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
+              }
+              else
+              {
+                <span class="card-content-font">@totalUsuarios</span>
+              }
+            </p>
           </div>
         </div>
       </div>
@@ -94,17 +94,17 @@
         <div class="card text-white bg-dark">
           <div class="card-body">
             <h5 class="card-title">Total Moderadores<span class="oi oi-people" style="color: gray; float: right"></span></h5>
-                <p class="card-text">
-                  @if (string.IsNullOrEmpty(version))
-                  {
-                    <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span> 
-                    <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
-                  }
-                  else
-                  {
-                    <span class="card-content-font">@version</span>
-                  }
-                </p>
+            <p class="card-text">
+              @if (sinDatos)
+              {
+                <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span>
+                <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
+              }
+              else
+              {
+                <span class="card-content-font">@totalModeradores</span>
+              }
+            </p>
           </div>
         </div>
       </div>
@@ -113,17 +113,17 @@
         <div class="card text-white bg-dark">
           <div class="card-body">
             <h5 class="card-title">Total Oyentes<span class="oi oi-people" style="color: gray; float: right"></span></h5>
-                <p class="card-text">
-                  @if (string.IsNullOrEmpty(version))
-                  {
-                    <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span> 
-                    <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
-                  }
-                  else
-                  {
-                    <span class="card-content-font">@version</span>
-                  }
-                </p>
+            <p class="card-text">
+              @if (sinDatos)
+              {
+                <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span>
+                <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
+              }
+              else
+              {
+                <span class="card-content-font">@oyentes</span>
+              }
+            </p>
           </div>
         </div>
       </div>
@@ -134,17 +134,17 @@
         <div class="card text-white bg-dark">
           <div class="card-body">
             <h5 class="card-title">Total con Audio<span class="oi oi-people" style="color: gray; float: right"></span></h5>
-                <p class="card-text">
-                  @if (string.IsNullOrEmpty(version))
-                  {
-                    <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span> 
-                    <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
-                  }
-                  else
-                  {
-                    <span class="card-content-font">@version</span>
-                  }
-                </p>
+            <p class="card-text">
+              @if (sinDatos)
+              {
+                <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span>
+                <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
+              }
+              else
+              {
+                <span class="card-content-font">@conAudio</span>
+              }
+            </p>
           </div>
         </div>
       </div>
@@ -153,17 +153,17 @@
         <div class="card text-white bg-dark">
           <div class="card-body">
             <h5 class="card-title">Total con Video<span class="oi oi-people" style="color: gray; float: right"></span></h5>
-                <p class="card-text">
-                  @if (string.IsNullOrEmpty(version))
-                  {
-                    <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span> 
-                    <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
-                  }
-                  else
-                  {
-                    <span class="card-content-font">@version</span>
-                  }
-                </p>
+            <p class="card-text">
+              @if (sinDatos)
+              {
+                <span class="oi oi-warning d-flex justify-content-center" aria-hidden="true" style="color: gray;"></span>
+                <span class="d-flex justify-content-center mt-1" style="font-size: 0.9em; color: gray;"><i>@message</i></span>
+              }
+              else
+              {
+                <span class="card-content-font">@conVideo</span>
+              }
+            </p>
           </div>
         </div>
       </div>
@@ -176,63 +176,117 @@
 
 @code {
   [Inject]
-      protected Sotsera.Blazor.Toaster.IToaster Toaster { get; set; }
+  protected Sotsera.Blazor.Toaster.IToaster Toaster { get; set; }
 
-      private string version { get; set; }
-      private string message { get; set; } = "No hay datos...";
-      private readonly HttpClient httpClient = new HttpClient();
-      private VersionBBB versionBBB;
-      private string url { get; set; }
-      private string secret { get; set; }
-      private bool firstRender { get; set; } = true;
+  private string version { get; set; }
+  private string salas { get; set; }
+  private string activas { get; set; }
+  private string totalUsuarios { get; set; } = "0";
+  private string totalModeradores { get; set; } = "0";
+  private string oyentes { get; set; } = "0";
+  private string conAudio { get; set; } = "0";
+  private string conVideo { get; set; } = "0";
+  private bool sinDatos { get; set; } = true;
 
-      protected override async Task OnAfterRenderAsync(bool firstRender)
+  private string message { get; set; } = "No hay datos...";
+  private readonly HttpClient httpClient = new HttpClient();
+  private VersionBBB versionBBB;
+  private MeetingResponse meetings;
+  private MeetingInfoResponse meetingsInfo;
+  private string url { get; set; }
+  private string secret { get; set; }
+  private bool firstRender { get; set; } = true;
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    if (firstRender)
+    {
+      url = await localStorage.GetItemAsync<string>("url");
+      secret = await localStorage.GetItemAsync<string>("secret");
+
+      try
       {
-          if (firstRender)
-          {
-              url = await localStorage.GetItemAsync<string>("url");
-              secret = await localStorage.GetItemAsync<string>("secret");
+        HttpResponseMessage response = await httpClient.GetAsync(url);
+        string responseContent = await response.Content.ReadAsStringAsync();
 
-              try
-              {
-                  HttpResponseMessage response = await httpClient.GetAsync(url);
-                  string responseContent = await response.Content.ReadAsStringAsync();
-
-                  if (response.IsSuccessStatusCode)
-                  {
-                      XmlSerializer x = new XmlSerializer(typeof(VersionBBB));
-                      versionBBB = (VersionBBB)x.Deserialize(new StringReader(responseContent));
-                      version = versionBBB.Version;
-                      this.StateHasChanged();
-                  }
-              }
-              catch (Exception e)
-              {
-                  Console.WriteLine(e);
-                  @* Toaster.Error("Ocurrió un error.", "Oops!");
-                  message = "Error...";
-                  this.StateHasChanged(); *@
-              }
-
-              try
-              {
-                  HttpResponseMessage response = await httpClient.GetAsync(ApiCall.getMeetings(url, secret));
-                  string responseContent = await response.Content.ReadAsStringAsync();
-
-                  if (response.IsSuccessStatusCode)
-                  {
-                      //this.StateHasChanged();
-                  }
-              }
-              catch (Exception e)
-              {
-                  Console.WriteLine(e);
-                  @* Toaster.Error("Ocurrió un error.", "Oops!");
-                  message = "Error...";
-                  this.StateHasChanged(); *@
-              }
-
-              firstRender = false;
-          }
+        if (response.IsSuccessStatusCode)
+        {
+          XmlSerializer x = new XmlSerializer(typeof(VersionBBB));
+          versionBBB = (VersionBBB)x.Deserialize(new StringReader(responseContent));
+          version = versionBBB.Version;
+          this.StateHasChanged();
+        }
       }
+      catch (Exception e)
+      {
+        Console.WriteLine(e);
+        @* Toaster.Error("Ocurrió un error.", "Oops!");
+          message = "Error...";
+          this.StateHasChanged(); *@
+      }
+
+      try
+      {
+        HttpResponseMessage response = await httpClient.GetAsync(ApiCall.getMeetings(url, secret));
+        string responseContent = await response.Content.ReadAsStringAsync();
+
+        if (response.IsSuccessStatusCode)
+        {
+          XmlSerializer x = new XmlSerializer(typeof(MeetingResponse));
+          meetings = (MeetingResponse)x.Deserialize(new StringReader(responseContent));
+          var count = 0;
+
+          if (meetings.Meetings.Meeting.Count() != 0)
+          {
+            for (int i = 0; i < meetings.Meetings.Meeting.Count(); ++i)
+            {
+              if (meetings.Meetings.Meeting[i].Running[0].ToString() == "true")
+              {
+                count++;
+              }
+              this.salas = meetings.Meetings.Meeting.Count().ToString();
+              this.activas = count.ToString();
+              this.StateHasChanged();
+            }
+          }
+
+          for (int i = 0; i < meetings.Meetings.Meeting.Count(); ++i)
+          {
+            try
+            {
+              HttpResponseMessage resp = await httpClient.GetAsync(ApiCall.getMeetingInfo(meetings.Meetings.Meeting[i], url, secret));
+              string respContent = await resp.Content.ReadAsStringAsync();
+
+              if (resp.IsSuccessStatusCode)
+              {
+                XmlSerializer xMInfo = new XmlSerializer(typeof(MeetingInfoResponse));
+                meetingsInfo = (MeetingInfoResponse)xMInfo.Deserialize(new StringReader(respContent));
+
+                this.totalUsuarios = (int.Parse(this.totalUsuarios) + int.Parse(meetingsInfo.ParticipantCount[0].ToString())).ToString();
+                this.totalModeradores = (int.Parse(this.totalModeradores) + int.Parse(meetingsInfo.ModeratorCount[0].ToString())).ToString();
+                this.oyentes = (int.Parse(this.oyentes) + int.Parse(meetingsInfo.ListenerCount[0].ToString())).ToString();
+                this.conAudio = (int.Parse(this.conAudio) + int.Parse(meetingsInfo.VoiceParticipantCount[0].ToString())).ToString();
+                this.conVideo = (int.Parse(this.conVideo) + int.Parse(meetingsInfo.VideoCount[0].ToString())).ToString();
+                this.sinDatos = false;
+                this.StateHasChanged();
+              }
+            }
+            catch (Exception e)
+            {
+              Console.WriteLine(e);
+            }
+          }
+        }
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(e);
+        @* Toaster.Error("Ocurrió un error.", "Oops!");
+          message = "Error...";
+          this.StateHasChanged(); *@
+      }
+
+      firstRender = false;
+    }
+  }
 }
