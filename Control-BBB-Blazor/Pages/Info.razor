@@ -220,9 +220,6 @@
       catch (Exception e)
       {
         Console.WriteLine(e);
-        @* Toaster.Error("Ocurrió un error.", "Oops!");
-          message = "Error...";
-          this.StateHasChanged(); *@
       }
 
       try
@@ -281,9 +278,7 @@
       catch (Exception e)
       {
         Console.WriteLine(e);
-        @* Toaster.Error("Ocurrió un error.", "Oops!");
-          message = "Error...";
-          this.StateHasChanged(); *@
+        Toaster.Error("Ocurrió un error.", "Oops!");
       }
 
       firstRender = false;
