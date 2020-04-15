@@ -4,6 +4,7 @@
 @using Control_BBB_Blazor.Utils
 @using System.IO;
 @using System.Xml.Serialization;
+@inject IHttpClientFactory httpClientFactory 
 
 <div class="card text-white bg-dark">
   <div class="card-header">
@@ -186,16 +187,15 @@
   private string oyentes { get; set; } = "0";
   private string conAudio { get; set; } = "0";
   private string conVideo { get; set; } = "0";
-  private bool sinDatos { get; set; } = true;
+  private bool sinDatos = true;
 
   private string message { get; set; } = "No hay datos...";
-  private readonly HttpClient httpClient = new HttpClient();
   private VersionBBB versionBBB;
   private MeetingResponse meetings;
   private MeetingInfoResponse meetingsInfo;
   private string url { get; set; }
   private string secret { get; set; }
-  private bool firstRender { get; set; } = true;
+  private bool firstRender = true;
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
@@ -206,7 +206,8 @@
 
       try
       {
-        HttpResponseMessage response = await httpClient.GetAsync(url);
+        var client = httpClientFactory.CreateClient();
+        var response = await client.GetAsync(url);
         string responseContent = await response.Content.ReadAsStringAsync();
 
         if (response.IsSuccessStatusCode)
@@ -224,7 +225,8 @@
 
       try
       {
-        HttpResponseMessage response = await httpClient.GetAsync(ApiCall.getMeetings(url, secret));
+        var client = httpClientFactory.CreateClient();
+        var response = await client.GetAsync(ApiCall.getMeetings(url, secret));
         string responseContent = await response.Content.ReadAsStringAsync();
 
         if (response.IsSuccessStatusCode)
@@ -251,13 +253,13 @@
           {
             try
             {
-              HttpResponseMessage resp = await httpClient.GetAsync(ApiCall.getMeetingInfo(meetings.Meetings.Meeting[i], url, secret));
-              string respContent = await resp.Content.ReadAsStringAsync();
+              response = await client.GetAsync(ApiCall.getMeetingInfo(meetings.Meetings.Meeting[i], url, secret));
+              responseContent = await response.Content.ReadAsStringAsync();
 
-              if (resp.IsSuccessStatusCode)
+              if (response.IsSuccessStatusCode)
               {
                 XmlSerializer xMInfo = new XmlSerializer(typeof(MeetingInfoResponse));
-                meetingsInfo = (MeetingInfoResponse)xMInfo.Deserialize(new StringReader(respContent));
+                meetingsInfo = (MeetingInfoResponse)xMInfo.Deserialize(new StringReader(responseContent));
 
                 this.totalUsuarios = (int.Parse(this.totalUsuarios) + int.Parse(meetingsInfo.ParticipantCount[0].ToString())).ToString();
                 this.totalModeradores = (int.Parse(this.totalModeradores) + int.Parse(meetingsInfo.ModeratorCount[0].ToString())).ToString();
