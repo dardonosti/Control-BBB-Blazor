@@ -6,6 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Sotsera.Blazor.Toaster.Core.Models;
+using Blazorise;
+using Blazorise.Bootstrap;
+using Blazorise.Icons.FontAwesome;
 
 namespace Control_BBB_Blazor
 {
@@ -26,6 +29,13 @@ namespace Control_BBB_Blazor
       services.AddServerSideBlazor();
       services.AddBlazoredLocalStorage();
       services.AddHttpClient();
+      services
+      .AddBlazorise(options =>
+       {
+         options.ChangeTextOnKeyPress = true; // optional
+       })
+      .AddBootstrapProviders()
+      .AddFontAwesomeIcons();
 
       // Add the library to the DI system
       services.AddToaster(config =>
@@ -61,6 +71,10 @@ namespace Control_BBB_Blazor
       app.UseStaticFiles();
 
       app.UseRouting();
+
+      app.ApplicationServices
+      .UseBootstrapProviders()
+      .UseFontAwesomeIcons();
 
       app.UseEndpoints(endpoints =>
       {

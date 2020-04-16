@@ -45,7 +45,6 @@
 
   private string url { get; set; } = "http://bbblisandro.duckdns.org/bigbluebutton/api";
   private string secret { get; set; } = "TM6I5tVVENQOLespdftbHQhF3M2SMYToOP7F4otJAc";
-  private bool firstRender { get; set; } = true;
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
@@ -53,7 +52,6 @@
     {
       await localStorage.SetItemAsync("url", url);
       await localStorage.SetItemAsync("secret", secret);
-      firstRender = false;
     }
   }
 

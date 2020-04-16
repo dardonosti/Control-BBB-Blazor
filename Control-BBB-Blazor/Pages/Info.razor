@@ -195,7 +195,6 @@
   private MeetingInfoResponse meetingsInfo;
   private string url { get; set; }
   private string secret { get; set; }
-  private bool firstRender = true;
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
@@ -282,8 +281,6 @@
         Console.WriteLine(e);
         Toaster.Error("Ocurrió un error.", "Oops!");
       }
-
-      firstRender = false;
     }
   }
 }
