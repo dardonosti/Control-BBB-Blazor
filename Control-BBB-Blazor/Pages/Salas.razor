@@ -6,7 +6,7 @@
 @using System.Xml.Serialization;
 @inject IHttpClientFactory httpClientFactory
 @using Blazorise
-@using System.Globalization; 
+@using System.Globalization;
 
 
 
@@ -29,33 +29,44 @@
           }
           else
           {
-            <TableTemplate Items="meetings.Meetings.Meeting">
+            /* Test */
+            <TableTemplate Items="listaGatos">
               <TableHeader>
-                <th>ID Sala</th>
-                <th>Nombre de Sala</th>
-                <th>Fecha y Hora</th>
-                <th>Activa</th>
+                <th>Nombre</th>
+                <th>Edad</th>
                 <th>Acciones</th>
               </TableHeader>
               <RowTemplate>
-                <td>@context.MeetingID</td>
-                <td>@context.MeetingName</td>
-                <td>@DateTimeOffset.FromUnixTimeMilliseconds(Int64.Parse(context.CreateTime)).ToString("dd/MM/yyyy HH:mm:ss")</td>
-                <td>@if (context.Running == "true") { <span>Si</span> } else { <span>No</span> }</td>
-                <td style="width:1px; white-space:nowrap;">
-                  <Tooltip Text="Consultar Sala">
-                    <button type="button" class="btn btn-primary btn-sm"><span class="oi oi-zoom-in" aria-hidden="true"></span></button>
-                  </Tooltip>
-                  <Tooltip Text="Consultar Usuarios">
-                    <button type="button" class="btn btn-primary btn-sm ml-2"><span class="oi oi-people" aria-hidden="true"></span></button>
-                  </Tooltip>
-                  <Tooltip Text="Cerrar Sala">
-                    <button type="button" class="btn btn-primary btn-sm ml-2"><span class="oi oi-circle-x" aria-hidden="true"></span></button>
-                  </Tooltip>
-                </td>
-              </RowTemplate>
-            </TableTemplate>
-          }
+                <td>@context.Nombre</td>
+            <td>@context.Edad</td>
+
+        @*<TableTemplate Items="meetings.Meetings.Meeting">
+          <TableHeader>
+            <th>ID Sala</th>
+            <th>Nombre de Sala</th>
+            <th>Fecha y Hora</th>
+            <th>Activa</th>
+            <th>Acciones</th>
+          </TableHeader>
+          <RowTemplate>
+            <td>@context.MeetingID</td>
+            <td>@context.MeetingName</td>
+            <td>@DateTimeOffset.FromUnixTimeMilliseconds(Int64.Parse(context.CreateTime)).ToString("dd/MM/yyyy HH:mm:ss")</td>
+            <td>@if (context.Running == "true") { <span>Si</span> } else { <span>No</span> }</td>*@
+        <td style="width:1px; white-space:nowrap;">
+          <Tooltip Text="Consultar Sala">
+            <button type="button" class="btn btn-primary btn-sm"><span class="oi oi-zoom-in pt-1" aria-hidden="true"></span></button>
+          </Tooltip>
+          <Tooltip Text="Consultar Usuarios">
+            <button type="button" class="btn btn-primary btn-sm ml-2"><span class="oi oi-people pt-1" aria-hidden="true"></span></button>
+          </Tooltip>
+          <Tooltip Text="Cerrar Sala">
+            <button type="button" class="btn btn-primary btn-sm ml-2"><span class="oi oi-circle-x pt-1" aria-hidden="true"></span></button>
+          </Tooltip>
+        </td>
+      </RowTemplate>
+    </TableTemplate>
+  }
         </div>
       </div>
     </div>
@@ -66,32 +77,32 @@
   [Inject]
   protected Sotsera.Blazor.Toaster.IToaster Toaster { get; set; }
 
-  private bool sinDatos = true;
+  private bool sinDatos = false;
   private string message = "No hay datos...";
   private string url { get; set; }
   private string secret { get; set; }
   private MeetingResponse meetings;
 
-  //List<Gato> listaGatos = new List<Gato>();
+  List<Gato> listaGatos = new List<Gato>();
 
-  //public class Gato
-  //{
-  //  public string Nombre { get; set; }
-  //  public int Edad { get; set; }
+  public class Gato
+  {
+    public string Nombre { get; set; }
+    public int Edad { get; set; }
 
-  //  public Gato(string nombre, int edad)
-  //  {
-  //    this.Nombre = nombre;
-  //    this.Edad = edad;
-  //  }
-  //}
+    public Gato(string nombre, int edad)
+    {
+      this.Nombre = nombre;
+      this.Edad = edad;
+    }
+  }
 
-  //protected override void OnInitialized()
-  //{
-  //  listaGatos.Add(new Gato("Miky", 6));
-  //  listaGatos.Add(new Gato("Panchi", 3));
-  //  listaGatos.Add(new Gato("Poro", 4));
-  //}
+  protected override void OnInitialized()
+  {
+    listaGatos.Add(new Gato("Miky", 6));
+    listaGatos.Add(new Gato("Panchi", 3));
+    listaGatos.Add(new Gato("Poro", 4));
+  }
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
@@ -116,7 +127,7 @@
       catch (Exception e)
       {
         Console.WriteLine(e);
-        Toaster.Error("Ocurrió un error.", "Oops!");
+        //Toaster.Error("Ocurrió un error.", "Oops!");
       }
     }
   }
