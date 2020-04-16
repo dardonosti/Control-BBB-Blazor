@@ -1,0 +1,15 @@
+﻿<div>
+  <p>@MeetingId</p>
+
+  <button @onclick="Close" class="btn btn-primary">Cerrar</button>
+</div>
+
+@code {
+
+  [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+
+  [Parameter] public int MeetingId { get; set; }
+
+  void Close() => BlazoredModal.Close(ModalResult.Ok(true));
+
+}

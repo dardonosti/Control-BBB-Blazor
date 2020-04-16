@@ -1,4 +1,5 @@
 using Blazored.LocalStorage;
+using Blazored.Modal;
 using Control_BBB_Blazor.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +29,7 @@ namespace Control_BBB_Blazor
       services.AddRazorPages();
       services.AddServerSideBlazor();
       services.AddBlazoredLocalStorage();
+      services.AddBlazoredModal();
       services.AddHttpClient();
       services
       .AddBlazorise(options =>

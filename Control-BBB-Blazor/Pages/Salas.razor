@@ -6,6 +6,7 @@
 @using System.Xml.Serialization;
 @inject IHttpClientFactory httpClientFactory
 @using Blazorise
+@inject IModalService Modal
 
 
 <div class="card text-white bg-dark">
@@ -39,16 +40,19 @@
                 <td>@context.MeetingID</td>
                 <td>@context.MeetingName</td>
                 <td>@DateTimeOffset.FromUnixTimeMilliseconds(Int64.Parse(context.CreateTime)).ToString("dd/MM/yyyy HH:mm:ss")</td>
-                <td>@if (context.Running == "true") { <span>Si</span> } else { <span>No</span> }</td>
+                <td>@if (context.Running == "true")
+                {<span>Si</span> }
+                else
+                { <span>No</span> } </td>
                 <td style="width:1px; white-space:nowrap;">
                   <Tooltip Text="Consultar Sala">
-                    <button type="button" class="btn btn-primary btn-sm"><span class="oi oi-zoom-in pt-1" aria-hidden="true"></span></button>
+                    <button type="button" @onclick="@(() => ShowModalSala(context.MeetingID, context.MeetingName))" class="btn btn-primary btn-sm"><span class="oi oi-zoom-in pt-1" aria-hidden="true"></span></button>
                   </Tooltip>
                   <Tooltip Text="Consultar Usuarios">
                     <button type="button" class="btn btn-primary btn-sm ml-2"><span class="oi oi-people pt-1" aria-hidden="true"></span></button>
                   </Tooltip>
                   <Tooltip Text="Cerrar Sala">
-                    <button type="button" class="btn btn-primary btn-sm ml-2"><span class="oi oi-circle-x pt-1" aria-hidden="true"></span></button>
+                    <button type="button" @onclick="@(() => CerrarSala(context.MeetingID))" class="btn btn-primary btn-sm ml-2"><span class="oi oi-circle-x pt-1" aria-hidden="true"></span></button>
                   </Tooltip>
                 </td>
               </RowTemplate>
@@ -69,6 +73,23 @@
   private string url { get; set; }
   private string secret { get; set; }
   private MeetingResponse meetings;
+
+  private void CerrarSala(string meetingId)
+  {
+    if (meetings.Meetings.Meeting.Count() > 0)
+    {
+      var item = meetings.Meetings.Meeting.Single(x => x.MeetingID.Equals(meetingId));
+      meetings.Meetings.Meeting.Remove(item);
+    }
+  }
+
+  void ShowModalSala(string meetingId, string meetingName)
+  {
+    var parameters = new ModalParameters();
+    parameters.Add(nameof(ModalSala.MeetingId), int.Parse(meetingId));
+
+    Modal.Show<ModalSala>("Sala: " + meetingName, parameters);
+  }
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
