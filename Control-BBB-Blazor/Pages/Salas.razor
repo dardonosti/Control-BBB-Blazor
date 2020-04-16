@@ -6,8 +6,6 @@
 @using System.Xml.Serialization;
 @inject IHttpClientFactory httpClientFactory
 @using Blazorise
-@using System.Globalization; 
-
 
 
 <div class="card text-white bg-dark">
@@ -44,13 +42,13 @@
                 <td>@if (context.Running == "true") { <span>Si</span> } else { <span>No</span> }</td>
                 <td style="width:1px; white-space:nowrap;">
                   <Tooltip Text="Consultar Sala">
-                    <button type="button" class="btn btn-primary btn-sm"><span class="oi oi-zoom-in" aria-hidden="true"></span></button>
+                    <button type="button" class="btn btn-primary btn-sm"><span class="oi oi-zoom-in pt-1" aria-hidden="true"></span></button>
                   </Tooltip>
                   <Tooltip Text="Consultar Usuarios">
-                    <button type="button" class="btn btn-primary btn-sm ml-2"><span class="oi oi-people" aria-hidden="true"></span></button>
+                    <button type="button" class="btn btn-primary btn-sm ml-2"><span class="oi oi-people pt-1" aria-hidden="true"></span></button>
                   </Tooltip>
                   <Tooltip Text="Cerrar Sala">
-                    <button type="button" class="btn btn-primary btn-sm ml-2"><span class="oi oi-circle-x" aria-hidden="true"></span></button>
+                    <button type="button" class="btn btn-primary btn-sm ml-2"><span class="oi oi-circle-x pt-1" aria-hidden="true"></span></button>
                   </Tooltip>
                 </td>
               </RowTemplate>
@@ -71,27 +69,6 @@
   private string url { get; set; }
   private string secret { get; set; }
   private MeetingResponse meetings;
-
-  //List<Gato> listaGatos = new List<Gato>();
-
-  //public class Gato
-  //{
-  //  public string Nombre { get; set; }
-  //  public int Edad { get; set; }
-
-  //  public Gato(string nombre, int edad)
-  //  {
-  //    this.Nombre = nombre;
-  //    this.Edad = edad;
-  //  }
-  //}
-
-  //protected override void OnInitialized()
-  //{
-  //  listaGatos.Add(new Gato("Miky", 6));
-  //  listaGatos.Add(new Gato("Panchi", 3));
-  //  listaGatos.Add(new Gato("Poro", 4));
-  //}
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
