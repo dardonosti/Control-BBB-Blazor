@@ -13,27 +13,29 @@ else
 {
 <div class="row" style="width: 800px">
   <div class="col-6">
-    <p><span class="badge badge-secondary">Curso: </span>mi curso</p>
-    <p><span class="badge badge-secondary">Fecha: </span>@meetingsInfo.CreateDate</p>
-    <p><span class="badge badge-secondary">Pass Moderador: </span>@meetingsInfo.ModeratorPW</p>
-    <p><span class="badge badge-secondary">Activa: </span>@meetingsInfo.Running</p>
-    <p><span class="badge badge-secondary">Duración: </span>@meetingsInfo.Duration</p>
-    <p><span class="badge badge-secondary">Grabando: </span>@meetingsInfo.Recording</p>
-    <p><span class="badge badge-secondary">Participantes: </span>@meetingsInfo.ParticipantCount</p>
+    <p><span class="badge badge-secondary">Curso: </span>
+    <span class="modal-text">mi curso</span>
+    </p>
+    <p><span class="badge badge-secondary">Fecha: </span><span class="modal-text">@meetingsInfo.CreateDate</span></p>
+    <p><span class="badge badge-secondary">Pass Moderador: </span><span class="modal-text">@meetingsInfo.ModeratorPW</span></p>
+    <p><span class="badge badge-secondary">Activa: </span><span class="modal-text">@meetingsInfo.Running</span></p>
+    <p><span class="badge badge-secondary">Duración: </span><span class="modal-text">@meetingsInfo.Duration</span></p>
+    <p><span class="badge badge-secondary">Grabando: </span><span class="modal-text">@meetingsInfo.Recording</span></p>
+    <p><span class="badge badge-secondary">Participantes: </span><span class="modal-text">@meetingsInfo.ParticipantCount</span></p>
   </div>
   <div class="col-6">
-    <p><span class="badge badge-secondary">Oyentes: </span>@meetingsInfo.ListenerCount</p>
-    <p><span class="badge badge-secondary">Cant. Max. Usuarios: </span>@meetingsInfo.MaxUsers</p>
-    <p><span class="badge badge-secondary">Moderadores: </span>@meetingsInfo.ModeratorCount</p>
-    <p><span class="badge badge-secondary">Usuario Creador: </span>@meetingsInfo.Metadata.Bnuserid</p>
-    <p><span class="badge badge-secondary">Server Origen: </span></p>
-    <p><span class="badge badge-secondary">Origen: </span></p>
+    <p><span class="badge badge-secondary">Oyentes: </span><span class="modal-text">@meetingsInfo.ListenerCount</span></p>
+    <p><span class="badge badge-secondary">Cant. Max. Usuarios: </span><span class="modal-text">@meetingsInfo.MaxUsers</span></p>
+    <p><span class="badge badge-secondary">Moderadores: </span><span class="modal-text">@meetingsInfo.ModeratorCount</span></p>
+    <p><span class="badge badge-secondary">Usuario Creador: </span><span class="modal-text">@meetingsInfo.Metadata.Bnuserid</span></p>
+    <p><span class="badge badge-secondary">Server Origen: </span><span class="modal-text"></span></p>
+    <p><span class="badge badge-secondary">Origen: </span><span class="modal-text"></span></p>
   </div>
 </div>
 }
 <div class="row">
   <div class="col">
-    <button @onclick="Close" class="btn btn-primary btn-sm">Cerrar</button>
+    <button @onclick="Close" class="btn btn-primary btn-sm" style="float: right;">Cerrar</button>
   </div>
 </div>
 
