@@ -7,12 +7,14 @@
 
 @if (meetingsInfo == null)
 {
-  <p><em>Cargando...</em></p>
+  <div class="spinner-grow" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
 }
 else
 {
-<div class="row" style="width: 800px">
-  <div class="col-6">
+<div class="row">
+  <div class="col">
     <p><span class="badge badge-secondary">Curso: </span>
     <span class="modal-text">mi curso</span>
     </p>
@@ -23,7 +25,7 @@ else
     <p><span class="badge badge-secondary">Grabando: </span><span class="modal-text">@meetingsInfo.Recording</span></p>
     <p><span class="badge badge-secondary">Participantes: </span><span class="modal-text">@meetingsInfo.ParticipantCount</span></p>
   </div>
-  <div class="col-6">
+  <div class="col">
     <p><span class="badge badge-secondary">Oyentes: </span><span class="modal-text">@meetingsInfo.ListenerCount</span></p>
     <p><span class="badge badge-secondary">Cant. Max. Usuarios: </span><span class="modal-text">@meetingsInfo.MaxUsers</span></p>
     <p><span class="badge badge-secondary">Moderadores: </span><span class="modal-text">@meetingsInfo.ModeratorCount</span></p>
