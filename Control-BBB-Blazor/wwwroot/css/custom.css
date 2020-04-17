@@ -51,3 +51,7 @@
     background-color: #524667cb !important;
     border-color: #524667cb;
 }
+
+.custom-modal {
+    width: 80%;
+}

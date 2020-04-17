@@ -1,7 +1,40 @@
-﻿<div>
-  <p>@MeetingId</p>
+﻿@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@using Control_BBB_Blazor.Data
+@using Control_BBB_Blazor.Utils
+@using System.IO;
+@using System.Xml.Serialization;
+@inject IHttpClientFactory httpClientFactory
 
-  <button @onclick="Close" class="btn btn-primary">Cerrar</button>
+@if (meetingsInfo == null)
+{
+  <p><em>Cargando...</em></p>
+}
+else
+{
+<div class="row" style="width: 800px">
+  <div class="col-6">
+    <p><span class="badge badge-secondary">Curso: </span>mi curso</p>
+    <p><span class="badge badge-secondary">Fecha: </span>@meetingsInfo.CreateDate</p>
+    <p><span class="badge badge-secondary">Pass Moderador: </span>@meetingsInfo.ModeratorPW</p>
+    <p><span class="badge badge-secondary">Activa: </span>@meetingsInfo.Running</p>
+    <p><span class="badge badge-secondary">Duración: </span>@meetingsInfo.Duration</p>
+    <p><span class="badge badge-secondary">Grabando: </span>@meetingsInfo.Recording</p>
+    <p><span class="badge badge-secondary">Participantes: </span>@meetingsInfo.ParticipantCount</p>
+  </div>
+  <div class="col-6">
+    <p><span class="badge badge-secondary">Oyentes: </span>@meetingsInfo.ListenerCount</p>
+    <p><span class="badge badge-secondary">Cant. Max. Usuarios: </span>@meetingsInfo.MaxUsers</p>
+    <p><span class="badge badge-secondary">Moderadores: </span>@meetingsInfo.ModeratorCount</p>
+    <p><span class="badge badge-secondary">Usuario Creador: </span>@meetingsInfo.Metadata.Bnuserid</p>
+    <p><span class="badge badge-secondary">Server Origen: </span></p>
+    <p><span class="badge badge-secondary">Origen: </span></p>
+  </div>
+</div>
+}
+<div class="row">
+  <div class="col">
+    <button @onclick="Close" class="btn btn-primary btn-sm">Cerrar</button>
+  </div>
 </div>
 
 @code {
@@ -9,7 +42,37 @@
   [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
 
   [Parameter] public int MeetingId { get; set; }
+  [Parameter] public MeetingResponse Sala { get; set; }
+
+  private string url { get; set; }
+  private string secret { get; set; }
+  private MeetingInfoResponse meetingsInfo;
 
   void Close() => BlazoredModal.Close(ModalResult.Ok(true));
 
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    if (firstRender)
+    {
+      url = await localStorage.GetItemAsync<string>("url");
+      secret = await localStorage.GetItemAsync<string>("secret");
+      try
+      {
+        var client = httpClientFactory.CreateClient();
+        var response = await client.GetAsync(ApiCall.getMeetingInfo(Sala.Meetings.Meeting[0], url, secret));
+        string responseContent = await response.Content.ReadAsStringAsync();
+
+        if (response.IsSuccessStatusCode)
+        {
+          XmlSerializer x = new XmlSerializer(typeof(MeetingInfoResponse));
+          meetingsInfo = (MeetingInfoResponse)x.Deserialize(new StringReader(responseContent));
+          this.StateHasChanged();
+        }
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(e);
+      }
+    }
+  }
 }

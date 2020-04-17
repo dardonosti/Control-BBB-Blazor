@@ -85,8 +85,13 @@
 
   void ShowModalSala(string meetingId, string meetingName)
   {
+    
+    Meeting m = meetings.Meetings.Meeting.Single(x => x.MeetingID.Equals(meetingId));
     var parameters = new ModalParameters();
-    parameters.Add(nameof(ModalSala.MeetingId), int.Parse(meetingId));
+    //parameters.Add(nameof(ModalSala.MeetingId), int.Parse(meetingId));
+    parameters.Add(nameof(ModalSala.Sala), meetings);
+
+    //parameters.Add(nameof(ModalSala.Sala), meetings.Meetings.Meeting[0].MeetingID[int.Parse(meetingId)]);
 
     Modal.Show<ModalSala>("Sala: " + meetingName, parameters);
   }
