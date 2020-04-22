@@ -10,9 +10,9 @@
       </div>
       <div class="card-body">
         <div class="d-flex justify-content-center">
-        <div class="alert alert-info col-xs-12 col-sm-10 col-md-10 col-lg-10" role="alert">
-          <strong>Servidor: </strong>BigBlueButton
-        </div>
+          <div class="alert alert-info col-xs-12 col-sm-10 col-md-10 col-lg-10" role="alert">
+            <strong>Servidor: </strong>BigBlueButton
+          </div>
         </div>
         <form @onsubmit="HandleSubmit">
           <div class="form-group row mt-3">
@@ -45,6 +45,7 @@
 
   private string url { get; set; } = "http://bbblisandro.duckdns.org/bigbluebutton/api";
   private string secret { get; set; } = "TM6I5tVVENQOLespdftbHQhF3M2SMYToOP7F4otJAc";
+
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
